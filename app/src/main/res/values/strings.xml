@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Reservando</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_sign_in">Entrar</string>
+    <string name="action_sign_in_short">Cadastrar</string>
+    <string name="error_invalid_email">Email invalido</string>
+    <string name="error_invalid_password">Senha invalida</string>
+    <string name="error_incorrect_password">Senha incorreta</string>
+    <string name="error_field_required">Preencha este campo</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="facebook_sign_in">Facebook</string>
+    <string name="gmail_sign_in">Google</string>
+
+    <string-array name="application_tabs">
+        <item>MINHAS RESERVAS</item>
+        <item>MEUS PEDIDOS</item>
+    </string-array>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
