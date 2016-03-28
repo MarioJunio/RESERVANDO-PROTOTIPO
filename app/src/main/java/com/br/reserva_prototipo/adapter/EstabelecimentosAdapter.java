@@ -22,13 +22,19 @@ import java.util.List;
  */
 public class EstabelecimentosAdapter extends RecyclerView.Adapter<EstabelecimentosAdapter.EstabelecimentosViewHolder> {
 
+    // contexto da aplicação
     private Context context;
 
+    // lista de estabelecimentos para renderizar
     private List<Estabelecimento> estabelecimentos;
+
+    // trata eventos de toque simples
+    private View.OnClickListener onClickListener;
 
     public EstabelecimentosAdapter(Context context) {
         this.context = context;
 
+        // instancia lista de estabelecimentos
         estabelecimentos = new ArrayList<>();
     }
 
@@ -50,11 +56,13 @@ public class EstabelecimentosAdapter extends RecyclerView.Adapter<Estabeleciment
         holder.icLock.setImageResource(isOpen ? R.drawable.ic_unlock : R.drawable.ic_lock);
         holder.horario.setText(isOpen ? Estabelecimento.Horario.Aberto.name() : Estabelecimento.Horario.Fechado.name());
         holder.localizacao.setText(estabelecimento.getEndereco().getCidade().getNome());
-        holder.fotoPerfil.setImageBitmap(Images.bitmap(estabelecimento.getFotoPerfil()));
+        holder.fotoPerfil.setImageBitmap(Images.toBitmap(estabelecimento.getFotoPerfil()));
 
         // cor do texto que apresenta o horario
         holder.horario.setTextColor(isOpen ? Color.parseColor(context.getString(R.color.green)) : Color.parseColor(context.getString(R.color.red)));
         holder.icLock.setColorFilter(isOpen ? Color.parseColor(context.getString(R.color.green)) : Color.parseColor(context.getString(R.color.red)));
+
+        holder.setOnClickListener(onClickListener);
     }
 
     @Override
@@ -62,9 +70,17 @@ public class EstabelecimentosAdapter extends RecyclerView.Adapter<Estabeleciment
         return estabelecimentos.size();
     }
 
+    public Estabelecimento getEstabelecimento(int index) {
+        return estabelecimentos.get(index);
+    }
+
     public void add(Estabelecimento estabelecimento) {
         estabelecimentos.add(estabelecimento);
         notifyItemInserted(estabelecimentos.size() - 1);
+    }
+
+    public void itemOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     public void delete(int index) {
@@ -74,6 +90,7 @@ public class EstabelecimentosAdapter extends RecyclerView.Adapter<Estabeleciment
 
     class EstabelecimentosViewHolder extends RecyclerView.ViewHolder {
 
+        private View view;
         public TextView categoria;
         private ImageView fotoPerfil;
         public TextView nomeFantansia;
@@ -84,6 +101,7 @@ public class EstabelecimentosAdapter extends RecyclerView.Adapter<Estabeleciment
         public EstabelecimentosViewHolder(View itemView) {
             super(itemView);
 
+            view = itemView;
             categoria = (TextView) itemView.findViewById(R.id.categoria);
             icLock = (ImageView) itemView.findViewById(R.id.ic_lock);
             fotoPerfil = (ImageView) itemView.findViewById(R.id.foto_perfil);
@@ -91,5 +109,10 @@ public class EstabelecimentosAdapter extends RecyclerView.Adapter<Estabeleciment
             horario = (TextView) itemView.findViewById(R.id.horario);
             localizacao = (TextView) itemView.findViewById(R.id.localizacao);
         }
+
+        public void setOnClickListener(View.OnClickListener onClickListener) {
+            view.setOnClickListener(onClickListener);
+        }
+
     }
 }

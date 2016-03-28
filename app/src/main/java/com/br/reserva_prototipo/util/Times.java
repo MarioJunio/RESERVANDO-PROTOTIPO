@@ -28,9 +28,9 @@ public class Times {
         dataFim.set(Calendar.MINUTE, horarioFim.get(Calendar.MINUTE));
         dataFim.set(Calendar.SECOND, 0);
 
-        Log.d(TAG, dateFormat.format(now.getTime()));
-        Log.d(TAG, dateFormat.format(dataInicio.getTime()));
-        Log.d(TAG, dateFormat.format(dataFim.getTime()));
+//        Log.d(TAG, dateFormat.format(now.getTime()));
+//        Log.d(TAG, dateFormat.format(dataInicio.getTime()));
+//        Log.d(TAG, dateFormat.format(dataFim.getTime()));
 
         return now.after(dataInicio) && now.before(dataFim);
     }

@@ -13,7 +13,18 @@ public class Atrativo implements Serializable {
     private String descricao;
 
     public enum TipoAtrativo {
-        WIFI, SHOW_AO_VIVO, AMBIENTE_ILUMINADO, PROXIMO_AO_CENTRO
+
+        WIFI("Wi-fi"), SHOW_AO_VIVO("Show ao Vivo"), AMBIENTE_ILUMINADO("Iluminação"), PROXIMO_AO_CENTRO("Próximo ao Centro");
+
+        private String nome;
+
+        TipoAtrativo(String nome) {
+            this.nome = nome;
+        }
+
+        public String getNome() {
+            return nome;
+        }
     }
 
     public Long getId() {

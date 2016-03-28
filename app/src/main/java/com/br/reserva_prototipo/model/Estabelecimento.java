@@ -1,13 +1,16 @@
 package com.br.reserva_prototipo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 /**
  * Created by MarioJ on 10/03/16.
  */
-public class Estabelecimento implements Serializable {
+public class Estabelecimento implements Serializable, Cloneable {
+
+    public static String KEY = "Estabelecimento";
 
     private Long id;
     private String nomeFantasia;
@@ -20,6 +23,13 @@ public class Estabelecimento implements Serializable {
     private int acomodacao;
     private Endereco endereco;
     private String descricao;
+    private List<TipoReserva> tiposReserva;
+    private List<Atrativo> atrativos;
+
+    public Estabelecimento() {
+        tiposReserva = new ArrayList<>();
+        atrativos = new ArrayList<>();
+    }
 
     public enum Categoria {
 
@@ -124,8 +134,24 @@ public class Estabelecimento implements Serializable {
         return descricao;
     }
 
+    public List<TipoReserva> getTiposReserva() {
+        return tiposReserva;
+    }
+
+    public void setTiposReserva(List<TipoReserva> tiposReserva) {
+        this.tiposReserva = tiposReserva;
+    }
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public List<Atrativo> getAtrativos() {
+        return atrativos;
+    }
+
+    public void setAtrativos(List<Atrativo> atrativos) {
+        this.atrativos = atrativos;
     }
 
     @Override
@@ -142,5 +168,13 @@ public class Estabelecimento implements Serializable {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Estabelecimento{" +
+                "id=" + id +
+                ", nomeFantasia='" + nomeFantasia + '\'' +
+                '}';
     }
 }

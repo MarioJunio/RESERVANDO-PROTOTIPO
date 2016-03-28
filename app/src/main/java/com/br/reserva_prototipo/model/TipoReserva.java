@@ -13,6 +13,7 @@ public class TipoReserva implements Serializable {
     private String tipo;
     private int quantidadePessoas;
     private BigDecimal valor;
+    private PromocaoReserva promocaoReserva;
 
     public Long getId() {
         return id;
@@ -54,6 +55,14 @@ public class TipoReserva implements Serializable {
         this.valor = valor;
     }
 
+    public PromocaoReserva getPromocaoReserva() {
+        return promocaoReserva;
+    }
+
+    public void setPromocaoReserva(PromocaoReserva promocaoReserva) {
+        this.promocaoReserva = promocaoReserva;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,5 +77,17 @@ public class TipoReserva implements Serializable {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoReserva{" +
+                "id=" + id +
+                ", estabelecimento=" + estabelecimento +
+                ", tipo='" + tipo + '\'' +
+                ", quantidadePessoas=" + quantidadePessoas +
+                ", valor=" + valor +
+                ", promocaoReserva=" + promocaoReserva +
+                '}';
     }
 }

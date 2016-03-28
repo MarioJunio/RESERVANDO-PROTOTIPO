@@ -9,7 +9,6 @@ import java.util.Date;
 public class PromocaoReserva implements Serializable {
 
     private Long id;
-    private TipoReserva tipoReserva;
     private Date dataInicio;
     private Date fataFim;
     private float desconto;
@@ -20,14 +19,6 @@ public class PromocaoReserva implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public TipoReserva getTipoReserva() {
-        return tipoReserva;
-    }
-
-    public void setTipoReserva(TipoReserva tipoReserva) {
-        this.tipoReserva = tipoReserva;
     }
 
     public Date getDataInicio() {
@@ -68,5 +59,15 @@ public class PromocaoReserva implements Serializable {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "PromocaoReserva{" +
+                "id=" + id +
+                ", dataInicio=" + dataInicio +
+                ", fataFim=" + fataFim +
+                ", desconto=" + desconto +
+                '}';
     }
 }
