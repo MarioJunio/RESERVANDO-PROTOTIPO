@@ -12,4 +12,6 @@
     <color name="black">#000</color>
     <color name="silver">#424242</color>
     <color name="light_silver">#E0E0E0</color>
+    <color name="medium_silver">#9E9E9E</color>
+    <color name="blue">#2196F3</color>
 </resources>

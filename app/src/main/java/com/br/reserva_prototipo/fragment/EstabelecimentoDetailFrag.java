@@ -1,12 +1,15 @@
 package com.br.reserva_prototipo.fragment;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,8 +20,7 @@ import com.br.reserva_prototipo.model.Estabelecimento;
 import com.br.reserva_prototipo.model.TipoReserva;
 import com.br.reserva_prototipo.util.AppUtils;
 import com.br.reserva_prototipo.util.Times;
-
-import java.text.DecimalFormat;
+import com.br.reserva_prototipo.view.ReservarEstabelecimentoDialog;
 
 /**
  * Created by MarioJ on 15/03/16.
@@ -35,8 +37,12 @@ public class EstabelecimentoDetailFrag extends Fragment {
     private TextView textEndereco;
     private TextView textEnderecoBairro;
     private TextView textCidadeEstado;
+    private Button btReservar;
     private LinearLayout layoutTiposReserva;
     private LinearLayout layoutAtrativos;
+
+    // dialog
+    private ReservarEstabelecimentoDialog reservarEstabelecimentoDialog;
 
     public EstabelecimentoDetailFrag(Estabelecimento estabelecimento) {
         this.estabelecimento = estabelecimento;
@@ -61,8 +67,11 @@ public class EstabelecimentoDetailFrag extends Fragment {
         textEndereco = (TextView) view.findViewById(R.id.text_endereco);
         textEnderecoBairro = (TextView) view.findViewById(R.id.text_endereco_bairro);
         textCidadeEstado = (TextView) view.findViewById(R.id.text_cidade_estado);
+        btReservar = (Button) getActivity().findViewById(R.id.bt_reservar);
         layoutTiposReserva = (LinearLayout) view.findViewById(R.id.layout_tipos_reserva);
         layoutAtrativos = (LinearLayout) view.findViewById(R.id.layout_atrativos);
+
+        AppUtils.setButtonTint(btReservar, Color.parseColor(getString(R.color.green)), PorterDuff.Mode.MULTIPLY);
 
         // checa se o estabelecimento esta aberto ou nao
         if (Times.isOpen(estabelecimento.getHorarioAbrir(), estabelecimento.getHorarioFechar()))
@@ -77,20 +86,17 @@ public class EstabelecimentoDetailFrag extends Fragment {
 
         for (TipoReserva tipoReserva : estabelecimento.getTiposReserva()) {
 
-            DecimalFormat formatCurrency = new DecimalFormat("#,###.00");
-            DecimalFormat formatPercent = new DecimalFormat("#.#");
-
             // inflate um item do tipo reserva
             View viewTipoReserva = LayoutInflater.from(getActivity()).inflate(R.layout.view_tipo_reserva, null);
 
             TipoReservaViewHolder tipoReservaViewHolder = new TipoReservaViewHolder(viewTipoReserva);
             tipoReservaViewHolder.textCodigo.setText(String.valueOf(tipoReserva.getId()));
             tipoReservaViewHolder.textTipo.setText(tipoReserva.getTipo());
-            tipoReservaViewHolder.textValor.setText("R$ " + formatCurrency.format(tipoReserva.getValor()));
+            tipoReservaViewHolder.textValor.setText("R$ " + AppUtils.getFormatCurrency().format(tipoReserva.getValor()));
             tipoReservaViewHolder.textQuantidadePessoas.setText("para " + String.valueOf(tipoReserva.getQuantidadePessoas()) + " pessoa(s)");
 
             if (tipoReserva.getPromocaoReserva() != null)
-                tipoReservaViewHolder.textPromocao.setText("Promoção " + formatPercent.format(tipoReserva.getPromocaoReserva().getDesconto()) + "% desconto");
+                tipoReservaViewHolder.textPromocao.setText("Promoção " + AppUtils.getFormatPercent().format(tipoReserva.getPromocaoReserva().getDesconto()) + "% desconto");
             else
                 tipoReservaViewHolder.textPromocao.setVisibility(View.GONE);
 
@@ -98,5 +104,24 @@ public class EstabelecimentoDetailFrag extends Fragment {
             layoutTiposReserva.addView(viewTipoReserva);
         }
 
+        // inicializa os eventos da view
+        setupListeners();
+
+    }
+
+    public void setupListeners() {
+
+        btReservar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                //TODO: Checar se o usuário esta logado, se sim mostrar dialogo de reserva
+
+                reservarEstabelecimentoDialog = new ReservarEstabelecimentoDialog((AppCompatActivity) getActivity(), estabelecimento.getTiposReserva());
+                reservarEstabelecimentoDialog.prepare();
+                reservarEstabelecimentoDialog.show();
+            }
+        });
     }
 }

@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,6 +27,7 @@ import com.br.reserva_prototipo.model.Estado;
 import com.br.reserva_prototipo.model.PromocaoReserva;
 import com.br.reserva_prototipo.model.TipoReserva;
 import com.br.reserva_prototipo.util.Images;
+import com.br.reserva_prototipo.view.FiltroEstabelecimentosDialog;
 
 import org.apache.commons.lang3.SerializationUtils;
 
@@ -38,9 +43,20 @@ public class EstabelecimentosFrag extends Fragment {
     private static final String TAG = "EstabelecimentosFrag";
     private RecyclerView recEstabelecimentos;
     private EstabelecimentosAdapter estabelecimentosAdapter;
+    private FloatingActionButton fabFilter;
+    private FiltroEstabelecimentosDialog filtroEstabelecimentosDialog;
+
+    private MenuItem miSortPopular;
+    private MenuItem miSortPreco;
 
     public static Fragment newInstance() {
         return new EstabelecimentosFrag();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -58,13 +74,56 @@ public class EstabelecimentosFrag extends Fragment {
         createMock();
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_estabelecimento_detail, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+        miSortPopular = menu.findItem(R.id.sort_mais_popular);
+        miSortPreco = menu.findItem(R.id.sort_menos_caro);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        String title = item.getTitle().toString();
+
+        if (item == miSortPopular) {
+
+            if (title.equals(getString(R.string.sort_mais_popular))) {
+                miSortPopular.setIcon(R.drawable.ic_piores);
+                miSortPopular.setTitle(getString(R.string.sort_menos_popular));
+            } else {
+                miSortPopular.setIcon(R.drawable.ic_melhores);
+                miSortPopular.setTitle(getString(R.string.sort_mais_popular));
+            }
+
+        } else if (item == miSortPreco) {
+
+            if (title.equals(getString(R.string.sort_maior_preco))) {
+                miSortPreco.setIcon(R.drawable.ic_cheaper);
+                miSortPreco.setTitle(getString(R.string.sort_menor_preco));
+            } else {
+                miSortPreco.setIcon(R.drawable.ic_expensive);
+                miSortPreco.setTitle(getString(R.string.sort_maior_preco));
+            }
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setupWidgets(View view) {
 
+        fabFilter = (FloatingActionButton) getActivity().findViewById(R.id.fab_filter);
         recEstabelecimentos = (RecyclerView) view.findViewById(R.id.rec_estabelecimentos);
         recEstabelecimentos.setHasFixedSize(true);
+
+        // cria gerenciador do layout do recyclerview
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recEstabelecimentos.setLayoutManager(layoutManager);
 
+        // cria adapter para acomodar os elementos do recyclerview
         estabelecimentosAdapter = new EstabelecimentosAdapter(getActivity().getApplicationContext());
         estabelecimentosAdapter.itemOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +150,18 @@ public class EstabelecimentosFrag extends Fragment {
         });
 
         recEstabelecimentos.setAdapter(estabelecimentosAdapter);
+
+        // evento de click no botao de filtro de estabelecimentos
+        fabFilter.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                filtroEstabelecimentosDialog.createAndShow();
+            }
+        });
+
+        // instancia dialog de filtro
+        filtroEstabelecimentosDialog = new FiltroEstabelecimentosDialog(getActivity());
     }
 
     private void createMock() {

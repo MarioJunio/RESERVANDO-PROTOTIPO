@@ -86,13 +86,11 @@
         android:gravity="bottom">
 
         <Button
-            android:id="@+id/bt_reserve"
+            android:id="@+id/bt_reservar"
+            style="@style/ButtonSave"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="RESERVAR"
-            android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:text="RESERVAR" />
 
     </RelativeLayout>
 

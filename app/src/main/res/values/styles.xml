@@ -26,4 +26,39 @@
         <item name="android:background">@color/light_silver</item>
     </style>
 
+    <style name="FilterLabel">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/silver</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
+
+    <style name="AppEditText">
+        <item name="android:background">@drawable/rounded_corners</item>
+        <item name="android:textColorHint">@color/medium_silver</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="ButtonSave">
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ButtonCancel">
+        <item name="android:backgroundTint">@color/red</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ButtonVerHorarios">
+        <item name="android:backgroundTint">@color/blue</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>
