@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -33,6 +34,104 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_esgotado"
+        style="@style/AppLayoutMensagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/error_color"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exclamation"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/text_response_esgotado"
+            style="@style/AppInfoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="As acomodações de Lanches do Kiko esgotarão" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_erro_inesperado"
+        style="@style/AppLayoutMensagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/error_color"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/error"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/text_response_erro"
+            style="@style/AppInfoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Não foi possível realizar a reservar" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_sucesso"
+            style="@style/AppLayoutMensagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/success"
+                android:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/text_response_sucesso"
+                style="@style/AppInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Reserva efetuada com sucesso!"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lb_detalhes_reserva"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/blue"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:text="Toque aqui para detalhes da Reserva" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lb_horario_reserva"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -40,62 +139,47 @@
 
         <TextView
             style="@style/FilterLabel"
-            android:id="@+id/lb_horario_reserva"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="10dp"
-            android:text="Nenhum horário definido" />
+            android:layout_marginRight="15dp"
+            android:text="@string/label_data_reserva" />
 
         <Button
             android:id="@+id/bt_ver_horarios"
+            style="@style/ButtonVerHorarios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/ButtonVerHorarios"
             android:text="Ver Horários" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/text_tipo_reserva"
+        style="@style/FilterLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Tipo da reserva" />
 
-        <TextView
-            style="@style/FilterLabel"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quantidade de pessoas" />
-
-        <NumberPicker
-            android:id="@+id/np_quantidade_pessoas"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/layout_tickets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp">
 
-        <TextView
-            style="@style/FilterLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ticket" />
-
-        <Spinner
-            android:id="@+id/spin_tipos_reserva"
+        <RadioGroup
+            android:id="@+id/rg_tickets"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-    </LinearLayout>
+        </RadioGroup>
+
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

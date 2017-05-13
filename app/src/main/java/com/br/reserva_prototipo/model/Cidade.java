@@ -8,8 +8,10 @@ import java.io.Serializable;
 public class Cidade implements Serializable {
 
     private Long id;
-    private String nome;
-    private Estado estado;
+    private String municipio;
+    private double latitude;
+    private double longitude;
+    private String uf;
 
     public Long getId() {
         return id;
@@ -19,20 +21,36 @@ public class Cidade implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getMunicipio() {
+        return municipio;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
     }
 
-    public Estado getEstado() {
-        return estado;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     @Override

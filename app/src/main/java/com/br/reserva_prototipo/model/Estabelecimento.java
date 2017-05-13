@@ -2,7 +2,7 @@ package com.br.reserva_prototipo.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,17 +14,26 @@ public class Estabelecimento implements Serializable, Cloneable {
 
     private Long id;
     private String nomeFantasia;
-    private byte[] fotoPerfil;
+    private byte[] foto;
     private Categoria categoria;
     private long rateTotal;
     private long rates;
-    private Calendar horarioAbrir;
-    private Calendar horarioFechar;
+    private Date horarioAbrir;
+    private Date horarioFechar;
     private int acomodacao;
     private Endereco endereco;
     private String descricao;
+    private String fone1;
+    private String fone2;
     private List<TipoReserva> tiposReserva;
     private List<Atrativo> atrativos;
+
+    // transient
+    private transient boolean fotoPerfilCarregada;
+
+    public enum SortField {
+        id, nomeFantasia, rates, acomodacao
+    }
 
     public Estabelecimento() {
         tiposReserva = new ArrayList<>();
@@ -43,6 +52,19 @@ public class Estabelecimento implements Serializable, Cloneable {
 
         public String getNome() {
             return nome;
+        }
+
+        public static Categoria parse(String nome) {
+
+            System.out.println("Categoria: " + nome);
+
+            for (Categoria c : Categoria.values()) {
+
+                if (c.getNome().equals(nome))
+                    return c;
+            }
+
+            return null;
         }
     }
 
@@ -66,12 +88,12 @@ public class Estabelecimento implements Serializable, Cloneable {
         this.nomeFantasia = nomeFantasia;
     }
 
-    public byte[] getFotoPerfil() {
-        return fotoPerfil;
+    public byte[] getFoto() {
+        return foto;
     }
 
-    public void setFotoPerfil(byte[] fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 
     public Categoria getCategoria() {
@@ -98,19 +120,19 @@ public class Estabelecimento implements Serializable, Cloneable {
         this.rates = rates;
     }
 
-    public Calendar getHorarioAbrir() {
+    public Date getHorarioAbrir() {
         return horarioAbrir;
     }
 
-    public void setHorarioAbrir(Calendar horarioAbrir) {
+    public void setHorarioAbrir(Date horarioAbrir) {
         this.horarioAbrir = horarioAbrir;
     }
 
-    public Calendar getHorarioFechar() {
+    public Date getHorarioFechar() {
         return horarioFechar;
     }
 
-    public void setHorarioFechar(Calendar horarioFechar) {
+    public void setHorarioFechar(Date horarioFechar) {
         this.horarioFechar = horarioFechar;
     }
 
@@ -134,6 +156,22 @@ public class Estabelecimento implements Serializable, Cloneable {
         return descricao;
     }
 
+    public String getFone1() {
+        return fone1;
+    }
+
+    public void setFone1(String fone1) {
+        this.fone1 = fone1;
+    }
+
+    public String getFone2() {
+        return fone2;
+    }
+
+    public void setFone2(String fone2) {
+        this.fone2 = fone2;
+    }
+
     public List<TipoReserva> getTiposReserva() {
         return tiposReserva;
     }
@@ -152,6 +190,14 @@ public class Estabelecimento implements Serializable, Cloneable {
 
     public void setAtrativos(List<Atrativo> atrativos) {
         this.atrativos = atrativos;
+    }
+
+    public boolean isFotoPerfilCarregada() {
+        return fotoPerfilCarregada;
+    }
+
+    public void setFotoPerfilCarregada(boolean fotoPerfilCarregada) {
+        this.fotoPerfilCarregada = fotoPerfilCarregada;
     }
 
     @Override

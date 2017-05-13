@@ -17,18 +17,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    provided 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.9.5"
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:design:22.2.1'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile 'com.android.support:cardview-v7:22.0.+'
     compile 'com.android.support:recyclerview-v7:22.0.+'
     compile 'com.joooonho:selectableroundedimageview:1.0.1'
-    compile 'org.apache.commons:commons-lang3:3.1'
+    compile 'org.roboguice:roboguice:3.0.1'
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'org.apache.commons:commons-collections4:4.0'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'commons-net:commons-net:3.3'
+    compile 'commons-io:commons-io:2.4'
+    compile 'commons-codec:commons-codec:1.10'
     compile project(':slideDateTimePicker')
 
 }

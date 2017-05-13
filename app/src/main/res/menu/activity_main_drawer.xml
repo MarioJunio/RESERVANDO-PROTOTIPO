@@ -5,7 +5,6 @@
 
         <item android:title="Bem vindo">
             <menu>
-
                 <item
                     android:id="@+id/username"
                     android:icon="@drawable/ic_pencil"

@@ -129,12 +129,27 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/foto_perfil"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/outback" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/foto_perfil"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/photo_default" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/red"
+                android:backgroundTintMode="src_atop"
+                android:indeterminate="true" />
+
+        </FrameLayout>
 
     </LinearLayout>
 

@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.br.reserva_prototipo.activity.EstabelecimentoDetail">
+
+    <item
+        android:id="@+id/sort_data_reserva"
+        android:icon="@drawable/ic_calendar_desc"
+        android:orderInCategory="1"
+        android:title="@string/sort_data_reserva_desc"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/sort_status_reserva"
+        android:icon="@drawable/status_menu"
+        android:orderInCategory="2"
+        android:title="@string/sort_status_reserva"
+        app:showAsAction="ifRoom" />
+</menu>

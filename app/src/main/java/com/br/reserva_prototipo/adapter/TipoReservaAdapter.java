@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.br.reserva_prototipo.R;
 import com.br.reserva_prototipo.model.TipoReserva;
-import com.br.reserva_prototipo.util.AppUtils;
+import com.br.reserva_prototipo.util.App;
 
 import java.util.List;
 
@@ -71,13 +71,13 @@ public class TipoReservaAdapter extends BaseAdapter {
         viewHolder.textTipo.setText(tipoReserva.getTipo());
 
         if (!def)
-            viewHolder.textValor.setText(AppUtils.getFormatCurrency().format(tipoReserva.getValor()));
+            viewHolder.textValor.setText(App.getFormatCurrency().format(tipoReserva.getValor()));
 
         if (!def)
             viewHolder.textQuantidadePessoas.setText("para " + String.valueOf(tipoReserva.getQuantidadePessoas()) + " pessoa(s)");
 
         if (tipoReserva.getPromocaoReserva() != null && !def)
-            viewHolder.textPromocao.setText(AppUtils.getFormatPercent().format(tipoReserva.getPromocaoReserva().getDesconto()) + "% desconto");
+            viewHolder.textPromocao.setText(App.getFormatPercent().format(tipoReserva.getPromocaoReserva().getDesconto()) + "% desconto");
         else
             viewHolder.textPromocao.setVisibility(View.GONE);
 

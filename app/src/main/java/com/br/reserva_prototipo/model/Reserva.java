@@ -1,5 +1,7 @@
 package com.br.reserva_prototipo.model;
 
+import com.google.gson.GsonBuilder;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,9 +12,9 @@ import java.util.Date;
 public class Reserva implements Serializable {
 
     private Long id;
-    private Cliente cliente;
+    private Usuario usuario;
     private Estabelecimento estabelecimento;
-    private Date horarioReservado;
+    private Date dataReserva;
     private int quantidadePessoas;
     private Date data;
     private TipoReserva tipoReserva;
@@ -20,7 +22,17 @@ public class Reserva implements Serializable {
     private StatusReserva statusReserva;
 
     public enum StatusReserva {
-        PENDENTE, REJEITADO, CONFIRMADO
+        PENDENTE("Pendente"), REJEITADO("Rejeitado"), CONFIRMADO("Confirmado");
+
+        private String nome;
+
+        StatusReserva(String nome) {
+            this.nome = nome;
+        }
+
+        public String getNome() {
+            return nome;
+        }
     }
 
     public Long getId() {
@@ -31,12 +43,13 @@ public class Reserva implements Serializable {
         this.id = id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public TipoReserva setCliente(Usuario usuario) {
+        this.usuario = usuario;
+        return null;
     }
 
     public Estabelecimento getEstabelecimento() {
@@ -47,12 +60,12 @@ public class Reserva implements Serializable {
         this.estabelecimento = estabelecimento;
     }
 
-    public Date getHorarioReservado() {
-        return horarioReservado;
+    public Date getDataReserva() {
+        return dataReserva;
     }
 
-    public void setHorarioReservado(Date horarioReservado) {
-        this.horarioReservado = horarioReservado;
+    public void setDataReserva(Date dataReserva) {
+        this.dataReserva = dataReserva;
     }
 
     public int getQuantidadePessoas() {
@@ -95,6 +108,10 @@ public class Reserva implements Serializable {
         this.statusReserva = statusReserva;
     }
 
+    public String toJson() {
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create().toJson(this);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,11 +120,25 @@ public class Reserva implements Serializable {
         Reserva reserva = (Reserva) o;
 
         return !(id != null ? !id.equals(reserva.id) : reserva.id != null);
-
     }
 
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "id=" + id +
+                ", usuario=" + usuario.getId() +
+                ", estabelecimento=" + estabelecimento.getId() +
+                ", dataReserva=" + dataReserva +
+                ", quantidadePessoas=" + quantidadePessoas +
+                ", data=" + data +
+                ", tipoReserva=" + tipoReserva.getId() +
+                ", total=" + total +
+                ", statusReserva=" + statusReserva.nome +
+                '}';
     }
 }

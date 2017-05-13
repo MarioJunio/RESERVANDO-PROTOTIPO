@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">Reservando</string>
 
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Entrar</string>
     <string name="action_sign_in_short">Cadastrar</string>
-    <string name="error_invalid_email">Email invalido</string>
-    <string name="error_invalid_password">Senha invalida</string>
+    <string name="error_invalid_email">Email inválido</string>
+    <string name="error_invalid_password">Senha deve conter no mínimo 3 caracteres alfanúmericos</string>
     <string name="error_incorrect_password">Senha incorreta</string>
     <string name="error_field_required">Preencha este campo</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
@@ -42,12 +41,28 @@
     <string name="horario_ambos">Ambos</string>
 
     <!-- Preferencias do filtro de estabelecimentos -->
-    <string name="preference_file_key">br.com.reservardo.preference_file_key</string>
+    <string name="pref_filtro_estabelecimentos">br.com.reservardo.preferencia_filtro_estabelecimentos</string>
     <string name="distancia">distancia</string>
     <string name="cidade">cidade</string>
     <string name="preco_min">preco_min</string>
     <string name="preco_max">preco_max</string>
     <string name="horario">horario</string>
     <string name="categoria">categoria</string>
+
+    <!-- Mensagens de alerta -->
+    <string name="estabelecimentos_nao_encontrados">Nenhum estabelecimento foi encontrado!</string>
+    <string name="estabelecimentos_erro">Não foi possível buscar os estabelecimentos!</string>
+
+    <!-- Mensagens de erro -->
+    <string name="et_min_preco">Preço mínimo inválido!</string>
+    <string name="et_max_preco">Preço máximo inválido!</string>
+    <string name="cadastrar_nova_conta">CRIAR UMA NOVA CONTA</string>
+    <string name="avancar">Avançar</string>
+    <string name="pular_etapa">Pular</string>
+    <string name="concluir">Concluir</string>
+    <string name="label_data_reserva">Escolha a data da reserva</string>
+    <string name="sort_data_reserva_desc">Reservas mais antigas</string>
+    <string name="sort_status_reserva">Status da Reserva</string>
+    <string name="sort_data_reserva_asc">Reservas mais próximas</string>
 
 </resources>

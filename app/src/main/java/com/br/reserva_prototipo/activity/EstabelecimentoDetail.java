@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,9 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.br.reserva_prototipo.R;
-import com.br.reserva_prototipo.fragment.EstabelecimentoDetailFrag;
+import com.br.reserva_prototipo.fragment.DetalhesEstabelecimentoFragment;
 import com.br.reserva_prototipo.model.Estabelecimento;
-import com.br.reserva_prototipo.util.Images;
+import com.br.reserva_prototipo.util.ImageUtils.Images;
 
 import java.io.File;
 
@@ -25,7 +24,7 @@ public class EstabelecimentoDetail extends AppCompatActivity {
     private static final String TAG = "EstabelecimentoDetail";
 
     // widgets
-    private ImageView imgFtoPerfil;
+    private ImageView fotoPerfil;
     private TextView textNomeFantasia;
     private ProgressBar progressBar;
 
@@ -47,7 +46,7 @@ public class EstabelecimentoDetail extends AppCompatActivity {
 
         createToolbar();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.content, EstabelecimentoDetailFrag.newInstance(estabelecimento)).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.content, DetalhesEstabelecimentoFragment.newInstance(estabelecimento)).commit();
     }
 
     /**
@@ -68,7 +67,7 @@ public class EstabelecimentoDetail extends AppCompatActivity {
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        imgFtoPerfil = (ImageView) findViewById(R.id.foto_perfil);
+        fotoPerfil = (ImageView) findViewById(R.id.foto_perfil);
         textNomeFantasia = (TextView) findViewById(R.id.nome_fantasia);
         progressBar = (ProgressBar) findViewById(R.id.progress);
 
@@ -81,7 +80,7 @@ public class EstabelecimentoDetail extends AppCompatActivity {
 //        });
 
         // carrega foto de perfil atual
-        loadFotoPerfil();
+        carregarFotoPerfil();
 
         // altera nome fantasia do estabelecimento
         textNomeFantasia.setText(estabelecimento.getCategoria() + " - " + estabelecimento.getNomeFantasia());
@@ -91,7 +90,9 @@ public class EstabelecimentoDetail extends AppCompatActivity {
     /**
      * Carrega foto de perfil que está salva no disco
      */
-    private void loadFotoPerfil() {
+    private void carregarFotoPerfil() {
+
+        //TODO: alterar método de carregamento
 
         new AsyncTask<Void, Void, Bitmap>() {
 
@@ -120,10 +121,13 @@ public class EstabelecimentoDetail extends AppCompatActivity {
 
                 try {
 
-                    if (bitmap != null)
-                        imgFtoPerfil.setImageBitmap(bitmap);
-                    else
-                        Log.d(TAG, "Foto Perfil nao carregada");
+                    if (bitmap != null) {
+                        fotoPerfil.setScaleType(ImageView.ScaleType.FIT_XY);
+                        fotoPerfil.setImageBitmap(bitmap);
+                    } else {
+                        fotoPerfil.setScaleType(ImageView.ScaleType.CENTER);
+                        fotoPerfil.setImageDrawable(getDrawable(R.drawable.photo_default));
+                    }
 
                 } finally {
                     progressBar.setVisibility(View.GONE);
